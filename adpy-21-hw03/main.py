@@ -16,7 +16,7 @@ def get_url_text(url):
         return False
 
 
-def main():
+def main(advaced_task=False):
     text = get_url_text(BASEURL)
     article_list = []
     if text:
@@ -27,18 +27,23 @@ def main():
             post_title = article.find('a', class_='post__title_link')
             post_title_text = post_title.text
             post_title_link = post_title['href']
-            post_text = article.find('div', class_='post__text').text
-            post_text_words = {word for word in post_text.split(' ')}
-            post_text_full = get_url_text(post_title_link)
-            post_fulltext_words = {}
-            if post_text_full:
-                soup_post = bs(post_text_full, features="html.parser")
-                post_fulltext = soup_post.find('div', class_='post__body_full').text
-                post_fulltext_words = {word for word in post_fulltext.split(' ')}
-            if (KEYWORDS & post_text_words) or (KEYWORDS & post_fulltext_words):
+            if advaced_task:
+                # Далее код от дополнительного задания
+                # отсюда
+                post_text_full = get_url_text(post_title_link)
+                post_words = {}
+                if post_text_full:
+                    soup_post = bs(post_text_full, features="html.parser")
+                    post_fulltext = soup_post.find('div', class_='post__body_full').text
+                    post_words = {word for word in post_fulltext.split(' ')}
+                # досюда
+            else:
+                post_text = article.find('div', class_='post__text').text
+                post_words = {word for word in post_text.split(' ')}
+            if KEYWORDS & post_words:
                 article_list.append(f'{post_time} - {post_title_text} - {post_title_link}')
         print(*article_list, sep='\n')
 
 
 if __name__ == '__main__':
-    main()
+    main(True)
