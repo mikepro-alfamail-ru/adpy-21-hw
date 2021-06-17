@@ -23,11 +23,11 @@ class Stack(list):
     def push(self, _item):
         self.append(_item)
 
-    def pop(self):
-        if not self.isEmpty():
-            _item = self[-1]
-            self.__delitem__(-1)
-            return _item
+    # def pop(self):
+    #     if not self.isEmpty():
+    #         _item = self[-1]
+    #         self.__delitem__(-1)
+    #         return _item
 
     def peek(self):
         if not self.isEmpty():
@@ -36,7 +36,6 @@ class Stack(list):
 
 def check_ballance(seq_):
     stack = Stack()
-    ballanced = True
     for item_ in seq_:
         if item_ in BAL_DICT:
             stack.push(item_)
@@ -44,11 +43,9 @@ def check_ballance(seq_):
             stack.pop()
         else:
             return False
-    return ballanced & stack.isEmpty()
+    return stack.isEmpty()
 
 
 if __name__ == '__main__':
-    for seq in BALLANCED_LIST:
-        print(check_ballance(seq))
-    for seq in UNBALLANCED_LIST:
-        print(check_ballance(seq))
+    for seq in BALLANCED_LIST + UNBALLANCED_LIST:
+        print(f'{seq:<30}{check_ballance(seq)}')
