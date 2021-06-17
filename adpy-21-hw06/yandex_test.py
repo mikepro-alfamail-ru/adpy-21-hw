@@ -3,6 +3,7 @@ from yandex_api import createfolder, get_folder_info
 
 FOLDERNAME = 'test'
 
+
 class TestYandexAPI(unittest.TestCase):
     def test_createfolder(self):
         result = createfolder(FOLDERNAME)

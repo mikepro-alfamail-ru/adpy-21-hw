@@ -12,6 +12,7 @@ def createfolder(folder_name):
     result = requests.put(apiurl, headers=headers, params=params)
     return result.status_code
 
+
 def get_folder_info(folder_name):
     params = {'path': folder_name}
     result = requests.get(apiurl, headers=headers, params=params)

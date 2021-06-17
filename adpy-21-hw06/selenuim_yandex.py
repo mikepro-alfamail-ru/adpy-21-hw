@@ -4,8 +4,10 @@ from yandex import login_, password_
 
 from selenium import webdriver
 
+
 def correct_login(login_=login_):
     return len(re.findall(r"\w[\w\d_]+@.*", login_)) == 1
+
 
 def selenium_login(login_=login_, password_=password_):
     if correct_login(login_):
@@ -26,6 +28,7 @@ def selenium_login(login_=login_, password_=password_):
         driver.close()
         driver.quit()
         return result
+
 
 if __name__ == '__main__':
     pass

@@ -2,6 +2,7 @@ import unittest
 import re
 from selenuim_yandex import selenium_login, correct_login
 
+
 class TestYandexAuth(unittest.TestCase):
     def test_login(self):
         self.assertTrue(correct_login())
