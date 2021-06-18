@@ -21,7 +21,7 @@ class EmailClient:
             sendmail_instance.starttls()
             sendmail_instance.ehlo()
             sendmail_instance.login(self.connect['login'], self.connect['password'])
-            result = sendmail_instance.sendmail(self.connect['login'], sendmail_instance, email_message.as_string())
+            result = sendmail_instance.sendmail(email_message['From'], email_message['To'], email_message.as_string())
             sendmail_instance.quit()
             return result
         except Exception as e:
@@ -37,9 +37,10 @@ class EmailClient:
             result, data = receive_mail_instance.uid('search', None, criterion)
             assert data[0], 'There are no letters with current header'
             latest_email_uid = data[0].split()[-1]
-            result, data = receive_mail_instance.uid('fetch', latest_email_uid, '(RFC822)')
+            print(latest_email_uid.decode('utf-8'))
+            result, data = receive_mail_instance.uid('fetch', latest_email_uid.decode('utf-8'), '(RFC822)')
             raw_email = data[0][1]
-            email_result_receive = email.message_from_string(raw_email)
+            email_result_receive = email.message_from_string(raw_email.decode('utf-8'))
             receive_mail_instance.logout()
             return email_result_receive
         except Exception as e:
