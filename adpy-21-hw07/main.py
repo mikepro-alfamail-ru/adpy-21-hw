@@ -28,6 +28,7 @@ class Stack(list):
     #         _item = self[-1]
     #         self.__delitem__(-1)
     #         return _item
+    # Закомментировал, так как метод pop() родительского класса делает то же самое
 
     def peek(self):
         if not self.isEmpty():
