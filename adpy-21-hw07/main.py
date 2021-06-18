@@ -34,6 +34,9 @@ class Stack(list):
         if not self.isEmpty():
             return self[-1]
 
+    def size(self):
+        return len(self)
+
 
 def check_ballance(seq_):
     stack = Stack()
